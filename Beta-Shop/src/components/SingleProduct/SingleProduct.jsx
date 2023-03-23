@@ -1,3 +1,5 @@
+import { useState, useContext } from "react";
+
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
 import {
   FaFacebookF,
@@ -11,10 +13,23 @@ import "./SingleProduct.scss";
 
 import useFetche from "../../hooks/useFetch";
 import { useParams } from "react-router-dom";
+import { Context } from "../../utils/context";
 
 const SingleProduct = () => {
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const { data } = useFetche(`/api/products?populate=*&[filters][id]=${id}`);
+  const { handleAddToCart } = useContext(Context);
+  const increment = () => {
+    setQuantity((prevState) => prevState + 1);
+  };
+
+  const decrement = () => {
+    setQuantity((prevState) => {
+      if (prevState === 1) return 1;
+      return prevState - 1;
+    });
+  };
 
   if (!data) return;
   const product = data.data[0].attributes;
@@ -35,12 +50,18 @@ const SingleProduct = () => {
             {/* ///////////////////////////////////////////////////// */}
             <div className="cart-buttons">
               <div className="quantity-buttons">
-                <span>-</span>
-                <span>0</span>
-                <span>+</span>
+                <span onClick={decrement}>-</span>
+                <span>{quantity}</span>
+                <span onClick={increment}>+</span>
               </div>
               {/* ///////////////////////////////////////////////////// */}
-              <button className="add-to-cart-button">
+              <button
+                className="add-to-cart-button"
+                onClick={() => {
+                  handleAddToCart(data.data[0], quantity);
+                  setQuantity(1);
+                }}
+              >
                 <FaCartPlus size={"20px"} />
                 ADD TO CART
               </button>
@@ -65,7 +86,10 @@ const SingleProduct = () => {
             </div>
           </div>
         </div>
-        <RelatedProducts />
+        <RelatedProducts
+          productId={id}
+          categoryId={product.categories.data[0].id}
+        />
       </div>
     </div>
   );
