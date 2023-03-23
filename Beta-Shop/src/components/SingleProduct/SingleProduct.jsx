@@ -8,19 +8,30 @@ import {
   FaCartPlus,
 } from "react-icons/fa";
 import "./SingleProduct.scss";
-import prod from "../../assets/products/earbuds-prod-1.webp";
+
+import useFetche from "../../hooks/useFetch";
+import { useParams } from "react-router-dom";
+
 const SingleProduct = () => {
+  const { id } = useParams();
+  const { data } = useFetche(`/api/products?populate=*&[filters][id]=${id}`);
+
+  if (!data) return;
+  const product = data.data[0].attributes;
   return (
     <div className="single-product-main-content">
       <div className="layout">
         <div className="single-product-page">
           <div className="left">
-            <img src={prod} alt="product" />
+            <img
+              src={"http://localhost:1337" + product.img.data[0].attributes.url}
+              alt="product"
+            />
           </div>
           <div className="right">
-            <span className="name">Product name</span>
-            <span className="price">Price</span>
-            <span className="desc">Product description</span>
+            <span className="name">{product.title}</span>
+            <span className="price">&#8380;{product.price}</span>
+            <span className="desc">{product.description}</span>
             {/* ///////////////////////////////////////////////////// */}
             <div className="cart-buttons">
               <div className="quantity-buttons">
@@ -38,8 +49,8 @@ const SingleProduct = () => {
             <span className="divider" />
             <div className="info-item">
               <span className="text-bold">
-                Category:
-                <span>Headhpones</span>
+                Category:{" "}
+                <span>{product.categories.data[0].attributes.title}</span>
               </span>
               <span className="text-bold">
                 Share:
