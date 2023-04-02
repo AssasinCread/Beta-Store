@@ -17,7 +17,19 @@
         @include md {
             font-size: 34px;
         }
+        &:after {
+            content: "";
+            display: block;
+            margin-top: 15px;
+            width: 100px;
+            height: 3px;
+            background-color: #8e2de2;
+            @include md {
+                margin-top: 20px;
+            }
+        }
     }
+    
     .products-container {
         margin: 20px 0;
         @include md {

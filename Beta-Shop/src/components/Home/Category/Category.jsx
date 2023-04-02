@@ -5,6 +5,8 @@ const Category = ({ categories }) => {
   const navigate = useNavigate();
   return (
     <div className="shop-by-category">
+      Categories
+      <span></span>
       <div className="categories">
         {categories?.data?.map((item) => (
           <div

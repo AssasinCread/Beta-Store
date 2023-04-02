@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { TbSearch } from "react-icons/tb";
 import { CgShoppingCart } from "react-icons/cg";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineUser} from "react-icons/ai";
 
 import Search from "./Search/Search";
 import Cart from "../Cart/Cart";
@@ -35,15 +35,14 @@ const Header = () => {
         <div className="header-content">
           <ul className="left">
             <li onClick={() => navigate("/")}>Home</li>
-            <li>About</li>
-            <li>Categories</li>
+            <li onClick={() => navigate("/about")}>About</li>
           </ul>
           <div onClick={() => navigate("/")} className="center">
             BETA | STORE
           </div>
           <div className="right">
+            <AiOutlineUser onClick={() => navigate("/login")} />
             <TbSearch onClick={() => setShowSearch(true)} />
-            <AiOutlineHeart />
             <span className="cart-icon" onClick={() => setShowCart(true)}>
               <CgShoppingCart />
              {!!cartCount && <span>{cartCount}</span>}
