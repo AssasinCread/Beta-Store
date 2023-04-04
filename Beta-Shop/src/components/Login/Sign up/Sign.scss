@@ -14,7 +14,7 @@
         align-items: center;
         position: relative;
         width: 400px;
-        height: 450px;
+        height: 650px;
         border-radius: 20px;
         border: 2px solid rgba(255, 255, 255, 0.5);
         background-color: transparent;
@@ -39,9 +39,9 @@
                 font-size: 1em;
                 color: #fff;
                 pointer-events: none;
+                transition: ease 0.5s;
             }:focus~label,:valid~label {
                 top: -5px;
-                transition: ease 0.5s;
             }
             input {
                 width: 100%;
@@ -59,23 +59,6 @@
                 color: #fff;
                 font-size: 1.2em;
                 line-height: 57px;
-            }
-        }
-        .remember-forgot {
-            margin: -15px 0 15px;
-            font-size: 0.9em;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            input {
-                margin-right: 5px;
-            }
-            span {
-                color: #fff;
-                text-decoration: none;
-                cursor: pointer;
-            }:hover {
-                text-decoration: underline;
             }
         }
     }

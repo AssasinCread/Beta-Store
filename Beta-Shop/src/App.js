@@ -10,6 +10,7 @@ import Newsletter from "./components/Footer/Newsletter/Newsletter";
 import Login from "./components/Login/Login";
 import Sign from './components/Login/Sign up/Sign'
 import AppContext from "./utils/context";
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
         <Newsletter />
         <Footer />
       </AppContext>
+      <ToastContainer/>
     </BrowserRouter>
   );
 }
